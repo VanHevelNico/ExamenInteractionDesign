@@ -31,9 +31,10 @@
     --global-color-neutral-transparent: rgba(23,22,26,0.15);
 
     --global-page-color: var(--color-neutral-xxxx-dark);
-    --global-page-backgroundColor: var(--color-neutral-xxx-light);
+    --global-page-backgroundColor: var(--global-color-neutral-xxx-light);
     --global-app-backgroundColor: var(--global-color-neutral-xxxx-light);
     --global-app-border:  var(--global-color-alpha) solid var(--global-borderWidth);
+    --global-app-InputBorder: var(--global-color-neutral-x-light) solid 1px;
 
     /* border stuff */
     --global-borderRadius: 4px;
@@ -59,13 +60,13 @@
     --global-input-focus-borderColor: var(--global-color-alpha);
     --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
 }
-
 @media (prefers-color-scheme: dark) {
     :root {
         --global-page-color: var(--global-color-neutral-xxxx-light);
         --global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
         --global-app-backgroundColor: var(--global-color-neutral-xxx-dark);
         --global-app-border:  var(--global-color-alpha-light) solid var(--global-borderWidth);
+        --global-app-InputBorder: var(--global-color-neutral-xx-dark) solid 1px;
     }
 
 }
@@ -399,6 +400,7 @@ input:disabled {
 .c-input__text {
     width: 100%; 
     color: var(--global-color-neutral);
+    background-color: var(--global-app-backgroundColor);
     border: var(--global-app-InputBorder);
     border-radius: var(--global-borderRadius);
 }
