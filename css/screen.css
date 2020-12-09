@@ -29,6 +29,12 @@
 
     --global-color-neutral-light-transparent: rgba(23,22,26,0.05);
     --global-color-neutral-transparent: rgba(23,22,26,0.15);
+
+    --global-page-color: var(--color-neutral-xxxx-dark);
+    --global-page-backgroundColor: var(--color-neutral-xxx-light);
+    --global-app-backgroundColor: var(--global-color-neutral-xxxx-light);
+    --global-app-border:  var(--global-color-alpha) solid var(--global-borderWidth);
+
     /* border stuff */
     --global-borderRadius: 4px;
     --global-borderWidth: 8px;
@@ -54,6 +60,15 @@
     --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --global-page-color: var(--global-color-neutral-xxxx-light);
+        --global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
+        --global-app-backgroundColor: var(--global-color-neutral-xxx-dark);
+        --global-app-border:  var(--global-color-alpha-light) solid var(--global-borderWidth);
+    }
+
+}
 /*------------------------------------*\
 #GENERIC
 \*------------------------------------*/
@@ -65,14 +80,18 @@
 */
 
 html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     font-size: 16px;
     line-height: 1.5;
     font-family: 'Inter', sans-serif;
-    color: Black;
+    color: var(--global-page-color);
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--global-color-neutral-xxx-light);
+    background-color: var(--global-page-backgroundColor);
 }
 
 *,
@@ -87,18 +106,6 @@ html {
 *
 * Customize the background color to match your design.
 */
-
-::-moz-selection {
-    background: orange;
-    color: white;
-    text-shadow: none;
-}
-
-::selection {
-    background: orange;
-    color: white;
-    text-shadow: none;
-}
 
 /*------------------------------------*\
 #Elements
@@ -368,10 +375,10 @@ input:disabled {
 
 .c-app {
     padding: var(--global-whitespace-lg);
-    background-color: var(--global-color-neutral-xxxx-light);
-    width: 32rem;
+    background-color: var(--global-app-backgroundColor);
+    max-width: 32rem;
     border-radius: var(--global-borderRadius);
-    border-top: var(--global-color-alpha) solid var(--global-borderWidth);
+    border-top: var(--global-app-border);
 }
 
 .c-form__title {
@@ -380,7 +387,7 @@ input:disabled {
 
 .c-input {
     max-width: 28rem;
-    border: solid 2px var(--global-color-alpha);
+    border: var(--global-app-border);
     border-radius: 2px;
     color: inherit;
     font-size: 16px;
@@ -392,7 +399,7 @@ input:disabled {
 .c-input__text {
     width: 100%; 
     color: var(--global-color-neutral);
-    border: var(--global-color-neutral-x-light) 1px solid;
+    border: var(--global-app-InputBorder);
     border-radius: var(--global-borderRadius);
 }
 /*------------------------------------*\
