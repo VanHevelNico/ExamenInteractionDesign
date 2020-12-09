@@ -69,6 +69,7 @@
     --global-checkboxBackgroundColor: var(--global-color-neutral-x-light);
     --global-checkboxColor: var(--global-color-neutral-xx-dark);
 
+    --global-checkboxBackgroundColorHover: var(--global-color-neutral-light);
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -84,7 +85,10 @@
         --global-backButton-fill: var(--global-color-neutral-xxxx-light);
         --global-checkboxBackgroundColor: var(--global-color-neutral-xx-dark);
         --global-checkboxColor: var(--global-color-neutral-x-light);
+        --global-checkboxBackgroundColorHover: var(--global-color-neutral-x-dark);
     }
+
+
 
 }
 /*------------------------------------*\
@@ -603,13 +607,21 @@ input:disabled {
   
   
 .c-checkbox:checked + label {
-    -webkit-transition: all 500ms ease;
-    transition: all 500ms ease;
+    -webkit-transition: all 50ms ease;
+    transition: all 50ms ease;
     background-color: var(--global-input-backgroundColor); 
     color: white; 
     border:none;
-  }
-  
+}
+
+.c-checkbox:hover + label{
+    background-color: var(--global-checkboxBackgroundColorHover);
+}
+
+.c-checkbox:focus + label{
+    border: var(--global-input-backgroundColor)  1px solid; 
+    box-shadow: 0 0 3px var(--global-input-backgroundColor);
+}
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
