@@ -33,7 +33,8 @@
     --global-page-color: var(--color-neutral-xxxx-dark);
     --global-page-backgroundColor: var(--global-color-neutral-xxx-light);
     --global-app-backgroundColor: var(--global-color-neutral-xxxx-light);
-    --global-app-border:  var(--global-color-alpha) solid var(--global-borderWidth);
+    --global-app-borderColor: var(--global-color-alpha);
+    --global-app-border:  var(--global-app-borderColor) solid var(--global-borderWidth);
     --global-app-InputBorder: var(--global-color-neutral-x-light) solid 1px;
 
     /* border stuff */
@@ -57,21 +58,25 @@
     --global-input-color: var(--global-color-neutral-xxxx-dark);
     --global-input-borderColor: var(--global-color-neutral-xxx-light);
     --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
-    --global-input-focus-borderColor: var(--global-color-alpha-light);
+    --global-input-focus-borderColor: none;
     --custom-option__symbol-Fill: var(--global-color-neutral-xxxx-light);
 
-    --global-input-focus-boxShadowColor: var(--global-color-alpha-transparent);
+    --global-input-focus-boxShadowColor: var(--global-color-alpha-light-transparent);
     --global-input-focus-boxShadow: 0 0 0 3px var(--global-input-focus-boxShadowColor);
+
+    --global-backButton-fill: var(--global-neutral-xxxx-dark);
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --global-page-color: var(--global-color-neutral-xxxx-light);
         --global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
         --global-app-backgroundColor: var(--global-color-neutral-xxx-dark);
-        --global-app-border:  var(--global-color-alpha-light) solid var(--global-borderWidth);
+        --global-app-borderColor: var(--global-color-alpha-light);
+        --global-app-border:  var(--global-app-borderColor) solid var(--global-borderWidth);
         --global-app-InputBorder: var(--global-color-neutral-xx-dark) solid 1px;
         --custom-option__symbol-Fill: var(--global-color-neutral-xxxx-light);
         --global-input-backgroundColor: var(--global-color-alpha-light);
+        --global-input-focus-boxShadowColor: var(--global-color-alpha-transparent);
     }
 
 }
@@ -482,11 +487,6 @@ input:disabled {
     transition: transform var(--global-transitionTiming-alpha), opacity var(--global-transitionTiming-alpha);
 }
 
-.c-custom-option__fake-input--checkbox .c-custom-option__symbol {
-    width: 10px;
-    height: 10px;
-    fill: var(--custom-option__symbol-Fill);
-}
 
 .c-custom-option__fake-input--radio .c-custom-option__symbol {
     background-color: var(--custom-option__symbol-Fill);
@@ -505,133 +505,19 @@ input:disabled {
 
 .c-option--hidden:focus + .c-custom-option,
 .c-option--hidden:active + .c-custom-option {
-    --custom-option-backgroundColor: #ff0000;
     --custom-option-borderColor: var(--global-input-focus-borderColor);
     --custom-option-boxShadow: var(--global-input-focus-boxShadow);
 }
 
+.c-option--hidden:focus + .c-custom-option__fake-input {
+    border: #Ff0000 1px solid;
+}
 /* checked state */
 
 .c-option--hidden:checked + .c-custom-option .c-custom-option__symbol {
     opacity: 1; /* Show the symbol when the invisible checkbox/radio button is checked */
+    --custom-option-boxShadow: var(--global-input-focus-boxShadow);
     transform: scale(1);
-}
-
-/*
-    Component: Custom Toggle
-    ---
-    Visually change a checkbox into a toggle
-*/
-
-.c-custom-toggle-list {
-    --toggle-list-borderColor: var(--global-color-neutral-xxx-light);
-    margin-bottom: var(--global-whitespace);
-}
-
-.c-custom-toggle-list__item {
-    margin-bottom: calc(var(--global-whitespace) / 2);
-}
-
-.c-custom-toggle-list__item + .c-custom-toggle-list__item {
-    padding-top: calc(var(--global-whitespace) / 2);
-    border-top: 1px solid var(--toggle-list-borderColor);
-}
-
-.c-custom-toggle {
-    --toggle-backgroundColor: var(--global-color-neutral-xxxx-light);
-    --toggle-checked-borderColor: var(--global-color-alpha-dark);
-    --toggle-checked-backgroundColor: var(--global-color-alpha);
-    --toggle-focus-boxShadow: var(--global-input-focus-boxShadow);
-    --toggle__switch-backgroundColor: White;
-    --toggle__switch-checked-backgroundColor: White;
-    --toggle__switch-transition: all var(--global-transitionTiming-alpha);
-    display: flex;
-    align-items: center;
-}
-
-.c-custom-toggle--inverted {
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
-
-.c-custom-toggle__fake-input {
-    display: block;
-    height: 24px;
-    width: 48px;
-    margin-right: var(--global-whitespace-md);
-    background-color: var(--toggle-backgroundColor);
-    border-radius: 32px;
-    border: var(--global-borderWidth) solid var(--toggle-borderColor, var(--global-input-borderColor));
-    transition: all var(--global-transitionTiming-alpha);
-    box-shadow: var(--toggle-boxShadow, 0);
-}
-
-.c-custom-toggle--inverted .c-custom-toggle__fake-input {
-    margin-right: 0;
-}
-
-.c-custom-toggle__fake-input::after {
-    position: relative;
-    display: block;
-    content: '';
-    height: 22px;
-    width: 22px;
-    border-radius: 22px;
-    box-shadow: 0 1px 3px 1px rgba(0,0,0,.2);
-    background-color: var(--toggle__switch-backgroundColor);
-    transition: var(--toggle__switch-transition);
-}
-
-/* focused and active state */
-
-.c-option--hidden:focus + .c-custom-toggle,
-.c-option--hidden:active + .c-custom-toggle {
-    --toggle-borderColor: var(--global-input-focus-borderColor);
-    --toggle-boxShadow: var(--toggle-focus-boxShadow);
-}
-
-/* checked state */
-
-.c-option--hidden:checked + .c-custom-toggle {
-    --toggle-backgroundColor: var(--toggle-checked-backgroundColor);
-    --toggle-borderColor: var(--toggle-checked-borderColor);
-    --toggle__switch-backgroundColor: var(--toggle__switch-checked-backgroundColor);    
-}
-
-.c-option--hidden:checked + .c-custom-toggle .c-custom-toggle__fake-input::after {
-    transform: translate(24px,0);
-}
-
-/* special active state */
-
-.c-option--hidden:active + .c-custom-toggle .c-custom-toggle__fake-input::after {
-    width: 28px;
-}
-
-.c-option--hidden:active:checked + .c-custom-toggle .c-custom-toggle__fake-input::after {
-    margin-left: -6px;
-}
-
-/*
-    Component: Custom Select
-    ---
-    Custom select dropdown
-*/
-
-
-.c-custom-select {
-    display: block;
-    position: relative;
-}
-
-.c-custom-select__symbol {
-    width: var(--global-whitespace);
-    height: var(--global-whitespace);
-    position: absolute;
-    top: calc(var(--global-whitespace) / 2);
-    right: calc(var(--global-whitespace) / 2);
-    pointer-events: none;
-    fill: var(--global-color-neutral-x-light);
 }
 
 /*
@@ -652,7 +538,38 @@ input:disabled {
     padding-bottom: 0;
 }
 
+/*button */
+.c-button {
+    float: right;
+    border: none;
+    width: 13rem;
+    font-size: 1rem;
+    padding: 1rem;
+    color: var(--global-color-neutral-x-light);
+    font-weight: 600;
+    border-radius: var(--global-borderRadius);
+    background-color: var(--global-app-borderColor);
+    box-shadow: 0px 3px 6px var(--global-input-focus-boxShadowColor);
 
+}
+
+.c-button:hover {
+    box-shadow: 0px 5px 6px var(--global-input-focus-boxShadowColor);
+}
+
+.c-button:active {
+    box-shadow: none;
+}
+
+.c-button:focus {
+    outline:none;
+    box-shadow: none;
+    border: var(--global-color-alpha-light-transparent) 3px solid;
+}
+
+.c-button__left {
+    fill: var(--global-backButton-fill);
+}
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
