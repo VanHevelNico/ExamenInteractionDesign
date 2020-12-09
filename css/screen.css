@@ -64,7 +64,11 @@
     --global-input-focus-boxShadowColor: var(--global-color-alpha-light-transparent);
     --global-input-focus-boxShadow: 0 0 0 3px var(--global-input-focus-boxShadowColor);
 
-    --global-backButton-fill: var(--global-neutral-xxxx-dark);
+    --global-backButton-fill: var(--global-color-neutral-xxxx-dark);
+
+    --global-checkboxBackgroundColor: var(--global-color-neutral-x-light);
+    --global-checkboxColor: var(--global-color-neutral-xx-dark);
+
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -77,6 +81,9 @@
         --custom-option__symbol-Fill: var(--global-color-neutral-xxxx-light);
         --global-input-backgroundColor: var(--global-color-alpha-light);
         --global-input-focus-boxShadowColor: var(--global-color-alpha-transparent);
+        --global-backButton-fill: var(--global-color-neutral-xxxx-light);
+        --global-checkboxBackgroundColor: var(--global-color-neutral-xx-dark);
+        --global-checkboxColor: var(--global-color-neutral-x-light);
     }
 
 }
@@ -409,10 +416,16 @@ input:disabled {
 
 .c-input__text {
     width: 100%; 
+    min-height: 10rem;
     color: var(--global-color-neutral);
     background-color: var(--global-app-backgroundColor);
     border: var(--global-app-InputBorder);
     border-radius: var(--global-borderRadius);
+}
+
+.c-input__text:focus {
+    border: var(--global-app-borderColor) 1px solid;
+    box-shadow: 2px var(--global-app-borderColor);
 }
 
 /*Custom radio's*/
@@ -568,8 +581,35 @@ input:disabled {
 }
 
 .c-button__left {
-    fill: var(--global-backButton-fill);
+    stroke: var(--global-backButton-fill);
 }
+
+/*checkboxes*/
+.c-checkbox {
+    display: none;
+  }
+  
+  .c-checkbox + label {
+    cursor: pointer;
+    border-radius: 2rem;
+    margin:  0.5rem 0.25rem 0 0.25rem;
+    background-color: var();
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    display: inline-block;
+    font-size: 0.75rem;
+    background-color: var(--global-checkboxBackgroundColor);
+    color: var(--global-checkboxColor);
+  }
+  
+  
+.c-checkbox:checked + label {
+    -webkit-transition: all 500ms ease;
+    transition: all 500ms ease;
+    background-color: var(--global-input-backgroundColor); 
+    color: white; 
+    border:none;
+  }
+  
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
